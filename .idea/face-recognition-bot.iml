@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module type="PYTHON_MODULE" version="4">
+  <component name="NewModuleRootManager">
+    <content url="file://$MODULE_DIR$">
+      <excludeFolder url="file://$MODULE_DIR$/venv" />
+    </content>
+    <orderEntry type="jdk" jdkName="Python 3.10 (face-recognition-bot)" jdkType="Python SDK" />
+    <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="library" name="telegram-web-app" level="application" />
+    <orderEntry type="library" name="aws-sdk-2.1035.0" level="application" />
+    <orderEntry type="library" name="font-awesome" level="application" />
+  </component>
+</module>
