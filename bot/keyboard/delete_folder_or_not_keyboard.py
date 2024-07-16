@@ -5,6 +5,7 @@ from aiogram.types import InlineKeyboardMarkup, InlineKeyboardButton
 
 from bot.text.button_text import ButtonText
 
+
 class FolderDeleteCbData(CallbackData, prefix="folders_delete"):
     person_name: str
     is_deleted: bool

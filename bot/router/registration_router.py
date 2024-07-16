@@ -12,5 +12,4 @@ router = Router(name=__name__)
 @router.message(F.text == ButtonText.GET_TELEGRAM_ID)
 async def get_user_id(message: types.Message):
     await message.answer(text(f"\n```\n{message.from_user.id}\n```"),
-    parse_mode=ParseMode.MARKDOWN_V2, keyboard=build_base_kb())
-
+                         parse_mode=ParseMode.MARKDOWN_V2, keyboard=build_base_kb())

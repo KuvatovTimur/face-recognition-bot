@@ -21,4 +21,3 @@ class ImageUploader(StatesGroup):
 async def upload_photo(message: types.Message, state: FSMContext):
     await message.answer(AnswerText.UPLOAD_PHOTO)
     await state.set_state(ImageUploader.image)
-
