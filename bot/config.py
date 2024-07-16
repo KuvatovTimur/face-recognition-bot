@@ -10,6 +10,10 @@ class WebApp(BaseModel):
     base_url: str = ""
 
 
+class EditPhotoWebPage(BaseModel):
+    base_url: str = ""
+
+
 class Api(BaseModel):
     base_url: str = ""
     token: str = ""
@@ -34,6 +38,7 @@ class Settings(BaseSettings):
     )
     bot: Bot = Bot()
     web_app: WebApp = WebApp()
+    edit_photo_web_page: EditPhotoWebPage = EditPhotoWebPage()
     api: Api = Api()
     s3: S3 = S3()
 

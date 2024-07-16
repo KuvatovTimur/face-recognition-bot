@@ -1,8 +1,12 @@
 import asyncio
 from typing import Union, Dict, Any
 
+import exif
+from aiofiles import tempfile
 from aiogram import BaseMiddleware
 from aiogram.types import Message
+
+from bot.repository.s3_repository import bot
 
 
 class AlbumMiddleware(BaseMiddleware):
@@ -21,7 +25,6 @@ class AlbumMiddleware(BaseMiddleware):
         if not event.media_group_id:
             data["album"] = [event]
             return await handler(event, data)
-
         if event.media_group_id not in self.album_data:
             self.album_data[event.media_group_id] = {"messages": []}
 

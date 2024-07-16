@@ -26,12 +26,18 @@ async def recognize_image(user_id: str,
                           key: str,
                           face_locations: List[FaceLocation] | None = None):
     async with aiohttp.ClientSession() as session:
-        async with session.post(settings.api.base_url + settings.api.face_recognition_prefix + "/image/recognize",
-                                params={'client_id': user_id,
-                                        'key': key},
-                                data={'face_locations': [fl.to_dict() for fl in
-                                                         face_locations] if face_locations is not None else []},
-                                headers=headers) as response:
+        url = settings.api.base_url + settings.api.face_recognition_prefix + "/image/recognize"
+        params = {
+            "client_id": user_id,
+            "key": key,
+        }
+        headers = {
+            "accept": "application/json",
+            "Authorization": "Bearer " + settings.api.token,
+            "Content-Type": "application/json"
+        }
+        data = [fl.to_dict() for fl in face_locations] if face_locations is not None else []
+        async with session.post(url, params=params, headers=headers, json=data) as response:
             return response
 
 
@@ -50,6 +56,17 @@ async def delete_person(user_id: int, person_name: str) -> ClientResponse:
                                   params={'client_id': user_id,
                                           'person_name': person_name},
                                   headers=headers) as response:
+            return response
+
+
+async def rename_person(user_id: int, previous_person_name: str, new_person_name: str) -> ClientResponse:
+    async with aiohttp.ClientSession() as session:
+        async with session.put(settings.api.base_url + settings.api.face_recognition_prefix + "/person/rename",
+                               params={'client_id': user_id,
+                                       'old_name': previous_person_name,
+                                       'new_name': new_person_name
+                                       },
+                               headers=headers) as response:
             return response
 
 
