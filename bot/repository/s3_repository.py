@@ -8,8 +8,9 @@ from aiogram.types import PhotoSize
 from bot.config import settings
 
 bot = Bot(
-        token=settings.bot.token,
-    )
+    token=settings.bot.token,
+)
+
 
 async def s3_put_image(
         image: PhotoSize,
@@ -24,6 +25,3 @@ async def s3_put_image(
                                        aws_secret_access_key=settings.s3.access_key,
                                        region_name=settings.s3.region_name) as s3:
         await s3.put_object(Body=file_bytes, Bucket=settings.s3.basket_name, ContentType=content_type, Key=key)
-
-
-

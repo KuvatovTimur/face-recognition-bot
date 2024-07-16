@@ -1,4 +1,5 @@
 import urllib.parse
+from typing import List
 
 from aiogram import types
 from aiogram.filters.callback_data import CallbackData
@@ -12,7 +13,7 @@ class FolderCbData(CallbackData, prefix="folder_data"):
     person_name: str
 
 
-async def build_web_app_kb(user_id: int) -> InlineKeyboardMarkup:
+async def build_web_app_kb(person_names: List[str]) -> InlineKeyboardMarkup:
     markup = InlineKeyboardMarkup(
         inline_keyboard=[[InlineKeyboardButton(text=person_name,
                                                web_app=WebAppInfo(
@@ -31,6 +32,6 @@ async def build_web_app_kb(user_id: int) -> InlineKeyboardMarkup:
                           InlineKeyboardButton(text='✏️ Edit',
                                                callback_data=FolderCbData(person_name=person_name).pack())] for
                          person_name in
-                         await get_all_person_names(user_id)],
+                         person_names],
     )
     return markup

@@ -8,9 +8,7 @@ def build_base_kb() -> ReplyKeyboardMarkup:
     my_files_btn = KeyboardButton(text=ButtonText.MY_FILES)
     register_btn = KeyboardButton(text=ButtonText.GET_TELEGRAM_ID)
     markup = ReplyKeyboardMarkup(
-        keyboard=[[upload_button, my_files_btn,register_btn]],
+        keyboard=[[upload_button, my_files_btn, register_btn]],
         resize_keyboard=True
     )
     return markup
-
-

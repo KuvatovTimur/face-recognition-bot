@@ -4,7 +4,7 @@ from aiogram.fsm.context import FSMContext
 from aiogram.fsm.state import StatesGroup, State
 from aiogram.types import CallbackQuery
 
-from bot.api.recognition_api import rename_person, delete_person
+from bot.api.recognition_api import rename_person, delete_person, get_all_person_names
 from bot.keyboard.delete_folder_or_not_keyboard import build_delete_folder_or_not_keyboard, FolderDeleteCbData
 from bot.keyboard.folders_edit_options_keyboard import build_folders_edit_options_keyboard, FolderEditOptionCbData, \
     FoldersEditOption
@@ -23,10 +23,16 @@ class FolderEdit(StatesGroup):
 
 
 @router.message(F.text == ButtonText.MY_FILES)
-async def my_photo(message: types.Message, user_id: int | None =None):
-    web_app_cb = await build_web_app_kb(message.from_user.id if not user_id else user_id)
-    await message.answer(AnswerText.GROUPS,
-                         reply_markup=web_app_cb)
+async def my_photo(message: types.Message, user_id: int | None = None):
+    person_names = await get_all_person_names(message.from_user.id if not user_id else user_id)
+    if len(person_names) == 0:
+        await message.answer(AnswerText.PHOTOS_NOT_FOUND),
+    else:
+        web_app_cb = await build_web_app_kb(person_names)
+        await message.answer(AnswerText.GROUPS,
+                             reply_markup=web_app_cb)
+
+
 
 
 @router.callback_query(FolderCbData.filter())
