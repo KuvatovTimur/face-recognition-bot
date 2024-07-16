@@ -10,3 +10,4 @@ class AnswerText:
     FOLDER_ALREADY_EXISTS = "Папка с таким именем уже существует"
     DELETE_OR_NOT_FOLDER = "Вы уверены, что хотите удалить папку?"
     FACE_NOT_FOUND = "Не удалось найти лицо на фото"
+    PHOTOS_NOT_FOUND = "У Вас нет загруженных фото"

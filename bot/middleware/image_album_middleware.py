@@ -33,7 +33,8 @@ class AlbumMiddleware(BaseMiddleware):
 
         await asyncio.sleep(self.latency)
 
-        if event.media_group_id in self.album_data and "messages" in self.album_data[event.media_group_id] and total_after == len(self.album_data[event.media_group_id]["messages"]):
+        if event.media_group_id in self.album_data and "messages" in self.album_data[
+            event.media_group_id] and total_after == len(self.album_data[event.media_group_id]["messages"]):
             album_messages = self.album_data[event.media_group_id]["messages"]
             album_messages.sort(key=lambda x: x.message_id)
             data["album"] = album_messages
